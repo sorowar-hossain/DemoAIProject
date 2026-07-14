@@ -44,7 +44,10 @@ KnowledgeService knowledgeService = new KnowledgeService();
 //TF_TermFrequencyService tfObj=new TF_TermFrequencyService();
 //var tf = tfObj.CalculateTF();
 
-IDF_InverseDocumentFrequencyService itfObj = new IDF_InverseDocumentFrequencyService();
-var tf = itfObj.CalculateIDF();
+//IDF_InverseDocumentFrequencyService itfObj = new IDF_InverseDocumentFrequencyService();
+//var tf = itfObj.CalculateIDF();
+
+CosineSimilarityService cosine=new CosineSimilarityService();
+Console.WriteLine(cosine.GetCosineSimilarity());
 
 Console.ReadKey();
