@@ -29,13 +29,13 @@ namespace AIChatbot.Services
                                 "ai"
                             };
 
-        public Dictionary<string, double> CalculateTF()
-        {
+        public Dictionary<string, double> CalculateTF(List<string> words) 
+        { 
             Dictionary<string, double> tf = new();
 
-            int totalWords = tokens.Count;
+            int totalWords = words.Count;
 
-            var frequencies = tokens
+            var frequencies = words
                 .GroupBy(x => x)
                 .ToDictionary(g => g.Key, g => g.Count());
 

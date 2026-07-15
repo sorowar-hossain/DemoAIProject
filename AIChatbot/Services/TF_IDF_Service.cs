@@ -12,7 +12,7 @@ namespace AIChatbot.Services
        /* Remember this sentence:
 
            TF tells us "How important is this word in this document?" 
-           and IDF tells us "How unique is this word across all documents?" 
+           and IDF tells us "How unique is this word across all documents or corpus?" 
            TF-IDF combines both to identify the most representative keywords of a document.
        
         */
@@ -22,12 +22,21 @@ namespace AIChatbot.Services
         private readonly Dictionary<string, double> tf;
         private readonly Dictionary<string, double> idf;
 
+        public List<string> tokens = new()
+                            {
+                                "love",
+                                "ai",
+                                "because",
+                                "ai",
+                                "future",
+                                "ai"
+                            };
         public TF_IDF_Service()
         {
             tfObj = new TF_TermFrequencyService();
             idfObj = new IDF_InverseDocumentFrequencyService();
 
-            tf = tfObj.CalculateTF();
+            tf = tfObj.CalculateTF(tokens);
             idf = idfObj.CalculateIDF();
         }
 

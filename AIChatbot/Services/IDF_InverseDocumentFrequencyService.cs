@@ -10,7 +10,7 @@ namespace AIChatbot.Services
     public class IDF_InverseDocumentFrequencyService
     {
         /*What is IDF?
-            IDF measures how rare a word is across all documents.
+            IDF measures how rare/unique a word is across all documents.
                 A word appearing in many documents gets a low IDF.
                 A word appearing in few documents gets a high IDF.
 
@@ -50,7 +50,7 @@ namespace AIChatbot.Services
 
 
 
-        public Dictionary<string, int> CalculateDocumentFrequency()
+        public Dictionary<string, int> CalculateDocumentFrequencyForMulDocument()
         {
             Dictionary<string, int> df = new();
 
@@ -71,11 +71,32 @@ namespace AIChatbot.Services
             return df;
         }
 
+        public Dictionary<string, int> CalculateDocumentFrequency(List<string> document)  
+        {
+            Dictionary<string, int> df = new();
+                //Distinct,Because Document Frequency counts whether a word appears in a document, not how many times it appears.
+                // And store it into Database for next use.
+                // If a new document comes then just process it
+                foreach (var word in document.Distinct())
+                {
+                    if (df.ContainsKey(word))
+                        df[word]++;
+                    else
+                        df[word] = 1;
+                }
+            foreach (var item in df)
+            {
+                Console.WriteLine($"{item.Key} : {item.Value:F3}");
+            }
+
+            return df;
+        }
+
         public Dictionary<string, double> CalculateIDF()
         {
             int totalDocuments = documents.Count;
 
-            var documentFrequency = CalculateDocumentFrequency();
+            var documentFrequency = CalculateDocumentFrequencyForMulDocument();
 
             Dictionary<string, double> idf = new();
 

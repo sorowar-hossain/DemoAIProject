@@ -21,19 +21,35 @@ namespace AIChatbot.Services
                                 };
 
         //Build the vocabulary:
-        public List<string> BuildVocabulary(List<List<string>> documents)
+        public List<string> BuildVocabulary(List<string> documents)
         {
             return documents
-                .SelectMany(x => x)
                 .Distinct()
                 .OrderBy(x => x)
                 .ToList();
+
+            // ===> This for multi documents
+            //return documents
+            //   .SelectMany(x => x)
+            //   .Distinct()
+            //   .OrderBy(x => x)
+            //   .ToList();
+        }
+
+        public List<string> BuildMultipleDocumentsVocabulary(List<List<string>> documents)
+        {
+            // ===> This for multi documents
+            return documents
+               .SelectMany(x => x)
+               .Distinct()
+               .OrderBy(x => x)
+               .ToList();
         }
 
         //This is exactly what ML models use.
         public int[] BagOfWords_FeatureExtraction(List<string> lemmas) 
         {
-            var vocabulary = BuildVocabulary(documents);
+            var vocabulary = BuildVocabulary(lemmas);
                 
             int[] vector = new int[vocabulary.Count];
 
