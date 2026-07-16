@@ -93,5 +93,7 @@ Console.WriteLine("-------------------");
 var idf = idfObj.CalculateDocumentFrequency(lemms);
 Console.WriteLine("-------------------");
 idfObj.CalculateIDF();
+Console.WriteLine("-------------------");
+commonsrv.N_Gram(lemms);
 
 Console.ReadKey();

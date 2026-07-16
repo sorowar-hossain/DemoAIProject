@@ -140,12 +140,62 @@ namespace AIChatbot.Services
             return result;
         }
 
-        //=========Stemming/Lemmatizations => Bag of Word ===========
+        //=========Stemming/Lemmatizations => N-Gram ===========
         /*
         Purpose
-         Convert text into numbers.
-         Machine learning cannot understand text.
-         It understands numbers.
+        understanding N-Grams is important because they help capture phrases instead of 
+        only individual words.
+        Without N-Grams, the sentence is treated as separate words, and it breaks relationship
+        
+        What is an N-Gram?
+        An N-Gram is a sequence of N consecutive words (or characters) from a piece of text.
+        N = 1 → Unigram
+        N = 2 → Bigram
+        N = 3 → Trigram
+        N = 4 → Four-gram
+
+        I love learning NLP
+        1. Unigram (N = 1)
+
+        Each individual word is one token.
+
+        I
+        love
+        learning
+        NLP
+
+        2. Bigram (N = 2)
+
+        Take two consecutive words.
+
+        I love
+        love learning
+        learning NLP
+
+        Output:
+
+        [I love]
+        [love learning]
+        [learning NLP]
         */
+
+        public List<string> N_Gram(List<string> words)
+        {
+            string sentence = "i love football very much";
+            //words = sentence.Split(' ').ToList();
+
+            List<string> bigrams = new();
+
+            for (int i = 0; i < words.Count - 1; i++)
+            {
+                bigrams.Add($"{words[i]} {words[i + 1]}");
+            }
+
+            foreach (var gram in bigrams)
+            {
+                Console.WriteLine(gram);
+            }
+            return bigrams;
+        }
     }
 }
