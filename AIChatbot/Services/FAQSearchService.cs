@@ -57,9 +57,53 @@ namespace AIChatbot.Services
 
                 allDocuments.Add(lemmas);
             }
+            var idf = commonService.CalculateIDF(allDocuments);
+
+            var tf_idf = commonService.CalculateTFIDF(tf,idf); 
+
+            var queryVectors=commonService.CreateVector(tf_idf,vocabulary);
+
+            List<double[]> faqVectors = new();
+
+            foreach (var faq in faqs)
+            {
+                var lemmas = commonService.Preprocess(faq.Question);
+
+                var tf_faq = commonService.CalculateTF(lemmas); 
+
+                var tfidf = commonService.CalculateTFIDF(tf, tf_faq);
+
+                var vector = commonService.CreateVector(tfidf, vocabulary);
+
+                faqVectors.Add(vector);
+            }
+
+            double bestScore = 0;
+            FAQModel? bestFaq = null;
+
+            for (int i = 0; i < faqs.Count; i++)
+            {
+                double score = commonService.CalculateCosineSimilarity(
+                    queryVectors,          // query vector
+                    faqVectors[i]);    // FAQ vector
+
+                if (score > bestScore)
+                { 
+                    bestScore = score;
+                    bestFaq = faqs[i];
+                }
+            }
+
+            double threshold = 0.20;
+
+            if (bestScore < threshold)
+            {
+                bestFaq = new FAQModel();
+                bestFaq.Answer = "Sorry, I couldn't find a matching FAQ.";
+            }
 
 
-            return "Processing now";
+            return bestFaq.Answer;
         }
     }
 }

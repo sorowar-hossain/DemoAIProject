@@ -100,7 +100,7 @@ commonsrv.N_Gram(lemms);
 
 */
 FAQSearchService faq=new FAQSearchService();
-string question = "forget my password!";
+string question = "subscription? cancel";
 Console.WriteLine(question);
 Console.WriteLine("-------------------");
 var res=faq.PreprocessFAQ(question);

@@ -304,6 +304,59 @@ namespace AIChatbot.Services
             return idf;
         }
 
+        //This preprocessing happens once when the application starts.
+        public Dictionary<string, double> CalculateTFIDF( Dictionary<string, double> tf, Dictionary<string, double> idf)
+        {
+            Dictionary<string, double> tfidf = new();
+
+            foreach (var item in tf)
+            {
+                if (idf.TryGetValue(item.Key, out double idfValue))
+                {
+                    tfidf[item.Key] = item.Value * idfValue;
+                }
+            }
+
+            return tfidf;
+        }
+
+        public double[] CreateVector( Dictionary<string, double> tfidf,List<string> vocabulary)
+        {
+            double[] vector = new double[vocabulary.Count];
+
+            for (int i = 0; i < vocabulary.Count; i++)
+            {
+                if (tfidf.TryGetValue(vocabulary[i], out double value))
+                    vector[i] = value;
+                else
+                    vector[i] = 0;
+            }
+
+            return vector;
+        }
+
+
+        public double CalculateCosineSimilarity(double[] vector1, double[] vector2)
+        {
+            if (vector1.Length != vector2.Length)
+                throw new ArgumentException("Vectors must have the same length.");
+
+            double dotProduct = 0;
+            double magnitude1 = 0;
+            double magnitude2 = 0;
+
+            for (int i = 0; i < vector1.Length; i++)
+            {
+                dotProduct += vector1[i] * vector2[i];
+                magnitude1 += vector1[i] * vector1[i];
+                magnitude2 += vector2[i] * vector2[i];
+            }
+
+            if (magnitude1 == 0 || magnitude2 == 0)
+                return 0;
+
+            return dotProduct / (Math.Sqrt(magnitude1) * Math.Sqrt(magnitude2));
+        }
 
         public List<string> Preprocess(string question)
         {
