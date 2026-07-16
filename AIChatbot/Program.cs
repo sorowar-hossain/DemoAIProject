@@ -50,6 +50,7 @@ IDF_InverseDocumentFrequencyService idfObj = new IDF_InverseDocumentFrequencySer
 //CosineSimilarityService cosine=new CosineSimilarityService();
 
 CommonService commonsrv = new CommonService();
+/*
 var normalized = commonsrv.NormalizeText("  Hello world World ! This is a Goat!@# and a boy is playing Football!, studies,studies");
 Console.WriteLine(normalized);
 Console.WriteLine("-------------------");
@@ -95,5 +96,14 @@ Console.WriteLine("-------------------");
 idfObj.CalculateIDF();
 Console.WriteLine("-------------------");
 commonsrv.N_Gram(lemms);
+
+
+*/
+FAQSearchService faq=new FAQSearchService();
+string question = "forget my password!";
+Console.WriteLine(question);
+Console.WriteLine("-------------------");
+var res=faq.PreprocessFAQ(question);
+Console.WriteLine(res);
 
 Console.ReadKey();

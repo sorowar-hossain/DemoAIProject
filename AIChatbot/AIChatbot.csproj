@@ -16,6 +16,12 @@
     <Content Include="Data\knowledge.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\faqs.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\sample.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\lemma.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

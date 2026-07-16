@@ -15,9 +15,42 @@ namespace AIChatbot.Services
 
         }
         public HashSet<string> stopWords =
-           new()
+        new()
            {
-                "is","the","a","an","of","at","to","for","what","am","was","were","in"
+                 // Articles
+                    "a", "an", "the",
+                 // Pronouns
+                    "i", "me", "my", "mine",
+                    "you", "your", "yours",
+                    "he", "him", "his",
+                    "she", "her", "hers",
+                    "it", "its",
+                    "we", "us", "our", "ours",
+                    "they", "them", "their", "theirs",
+               // Be verbs
+                    "am", "is", "are", "was", "were", "be", "been", "being",
+
+                // Auxiliary verbs
+                    "do", "does", "did",
+                    "have", "has", "had",
+
+                // Modal verbs
+                "can", "could", "will", "would",
+                "shall", "should",
+                "may", "might", "must",
+
+                // Common question words
+                "how", "what", "when", "where",
+                "which", "who", "whom", "whose",
+                "why",
+
+                // Prepositions
+                "of", "to", "for", "at", "in", "on",
+                "by", "with", "from", "into", "onto",
+                "over", "under", "between", "through",
+
+                // Conjunctions
+                "and", "or", "but", "if", "than", "then", "as"
            };
         private Dictionary<string, string> _dictionary;
         //=========Text normalization ===========
@@ -45,10 +78,10 @@ namespace AIChatbot.Services
             Computers process words individually.
          */
 
-        public string[] Tokenization(string text)
+        public List<string> Tokenization(string text)
         {
-            string[] words = text.Split(' ',
-                StringSplitOptions.RemoveEmptyEntries);
+            List<string> words = text.Split(' ',
+                StringSplitOptions.RemoveEmptyEntries).ToList();
             return words;
         }
 
@@ -61,7 +94,7 @@ namespace AIChatbot.Services
             These words appear everywhere.
             They don't help distinguish documents.
          */
-        public List<string> RemoveStopWord(string[] words)
+        public List<string> RemoveStopWord(List<string> words)
         {
             var wrds = words
                     .Where(w => !stopWords.Contains(w))
@@ -122,7 +155,7 @@ namespace AIChatbot.Services
             Slower
             Needs a dictionary/model
          */
-        public List<string> Lemmatize(List<string> words)
+        public List<string> Lemmatization(List<string> words) 
         {
             List<string> result = new();
             string path = Path.Combine(AppContext.BaseDirectory, "Data", "lemma.json");
@@ -197,5 +230,97 @@ namespace AIChatbot.Services
             }
             return bigrams;
         }
+
+
+        /*
+         Term Frequency(TF) measures how many times a word appears in a document.
+         TF measures how important a word is within a single document
+         Instead of only knowing whether a word exists(BoW), 
+         TF tells us how important the word is inside that document based on how often it appears.
+        */
+        public Dictionary<string, double> CalculateTF(List<string> words)
+        {
+            Dictionary<string, double> tf = new();
+
+            int totalWords = words.Count;
+
+            var frequencies = words
+                .GroupBy(x => x)
+                .ToDictionary(g => g.Key, g => g.Count());
+
+            foreach (var item in frequencies)
+            {
+                tf[item.Key] = (double)item.Value / totalWords;
+            }
+
+            return tf;
+        }
+
+        /*
+         The important difference is:
+
+        TF → Calculated for one document.
+        IDF → Calculated using all documents.
+
+        So you should not pass List<string> words to the IDF method. Instead, pass all processed FAQ documents.
+
+        Formula
+        IDF(t)=log(N/DF(t)​)
+
+        Where:
+
+        N = Total number of documents
+        DF = Number of documents containing the word
+
+        For example:
+
+            Doc1: reset password
+            Doc2: change password
+            Doc3: update email
+
+            To calculate the IDF of password, you must know:
+
+            Total documents = 3
+            Documents containing "password" = 2
+      */
+        public Dictionary<string, double> CalculateIDF(List<List<string>> documents)
+        {
+            Dictionary<string, double> idf = new();
+
+            int totalDocuments = documents.Count;
+
+            // Vocabulary
+            var vocabulary = documents
+                .SelectMany(x => x)
+                .Distinct();
+
+            foreach (var word in vocabulary)
+            {
+                int documentFrequency = documents.Count(doc => doc.Contains(word));
+
+                idf[word] = Math.Log((double)totalDocuments / documentFrequency);
+            }
+
+            return idf;
+        }
+
+
+        public List<string> Preprocess(string question)
+        {
+            // Step 1
+            string normalized = NormalizeText(question);
+
+            // Step 2 
+            List<string> words = Tokenization(normalized);
+
+            // Step 3
+            words = RemoveStopWord(words);
+
+            // Step 4
+            words = Lemmatization(words);
+
+            return words;
+        }
+
     }
 }
