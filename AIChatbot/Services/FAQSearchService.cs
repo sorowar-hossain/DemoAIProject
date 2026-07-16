@@ -69,9 +69,9 @@ namespace AIChatbot.Services
             {
                 var lemmas = commonService.Preprocess(faq.Question);
 
-                var tf_faq = commonService.CalculateTF(lemmas); 
+                var tf_Faq = commonService.CalculateTF(lemmas);   
 
-                var tfidf = commonService.CalculateTFIDF(tf, tf_faq);
+                var tfidf = commonService.CalculateTFIDF(tf, tf_Faq);
 
                 var vector = commonService.CreateVector(tfidf, vocabulary);
 
