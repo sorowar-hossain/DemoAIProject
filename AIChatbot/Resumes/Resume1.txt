@@ -1,0 +1,14 @@
+Name : John
+
+Experience
+
+Senior C# Developer
+
+Skills
+
+C#
+ASP.NET Core
+SQL Server
+Azure
+Docker
+REST API

@@ -1,0 +1,26 @@
+Name: Sarah Johnson
+
+Experience
+
+Full Stack .NET Developer (5 Years)
+
+Skills
+
+C#
+ASP.NET MVC
+ASP.NET Core
+Angular
+TypeScript
+SQL Server
+Redis
+Azure DevOps
+JavaScript
+
+Education
+
+BSc in Software Engineering
+
+Summary
+
+Full Stack Developer experienced in building scalable web applications
+using .NET and Angular.

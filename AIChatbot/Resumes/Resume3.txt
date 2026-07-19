@@ -1,0 +1,27 @@
+Name: John Smith
+
+Experience
+
+Senior C# Developer (7 Years)
+
+Skills
+
+C#
+ASP.NET Core
+.NET 8
+SQL Server
+Entity Framework Core
+Azure
+Docker
+REST API
+Microservices
+Git
+
+Education
+
+BSc in Computer Science
+
+Summary
+
+Experienced .NET developer specializing in enterprise web applications,
+REST APIs, cloud deployment, and SQL Server database design.

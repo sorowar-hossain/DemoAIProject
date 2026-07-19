@@ -1,0 +1,24 @@
+Name: Emma White
+
+Experience
+
+QA Automation Engineer (6 Years)
+
+Skills
+
+Selenium
+C#
+SpecFlow
+Postman
+REST API
+Azure DevOps
+SQL
+JUnit
+
+Education
+
+BSc in Computer Science
+
+Summary
+
+QA Automation Engineer specializing in UI testing, API testing, and CI/CD integration.

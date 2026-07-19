@@ -99,11 +99,21 @@ commonsrv.N_Gram(lemms);
 
 
 */
-FAQSearchService faq=new FAQSearchService();
-string question = "subscription? cancel";
+
+/*
+    FAQSearchService faq=new FAQSearchService();
+    string question = "subscription? cancel";
+    Console.WriteLine(question);
+    Console.WriteLine("-------------------");
+    var res=faq.PreprocessFAQ(question);
+    Console.WriteLine(res);
+ */
+
+ResumeSearchEngineService resumeSearchEngineService = new ResumeSearchEngineService();
+string question = "senior c# developer with sql and azure";
 Console.WriteLine(question);
 Console.WriteLine("-------------------");
-var res=faq.PreprocessFAQ(question);
-Console.WriteLine(res);
+var response = resumeSearchEngineService.GetResumes(question);
+
 
 Console.ReadKey();

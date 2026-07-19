@@ -1,0 +1,24 @@
+Name: Sophia Martinez
+
+Experience
+
+Frontend Developer (4 Years)
+
+Skills
+
+Angular
+TypeScript
+HTML
+CSS
+Bootstrap
+JavaScript
+RxJS
+REST API
+
+Education
+
+BSc in Computer Science
+
+Summary
+
+Frontend developer building responsive web applications using Angular.

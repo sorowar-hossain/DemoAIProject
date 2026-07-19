@@ -10,6 +10,16 @@
   <ItemGroup>
     <None Remove="Data\knowledge.json" />
     <None Remove="Data\lemma.json" />
+    <None Remove="Resumes\Resume1.txt" />
+    <None Remove="Resumes\Resume10.txt" />
+    <None Remove="Resumes\Resume2.txt" />
+    <None Remove="Resumes\Resume3.txt" />
+    <None Remove="Resumes\Resume4.txt" />
+    <None Remove="Resumes\Resume5.txt" />
+    <None Remove="Resumes\Resume6.txt" />
+    <None Remove="Resumes\Resume7.txt" />
+    <None Remove="Resumes\Resume8.txt" />
+    <None Remove="Resumes\Resume9.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +34,36 @@
     </Content>
     <Content Include="Data\lemma.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resumes\Resume1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resumes\Resume10.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resumes\Resume2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resumes\Resume3.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resumes\Resume4.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resumes\Resume5.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resumes\Resume6.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resumes\Resume7.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resumes\Resume8.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resumes\Resume9.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

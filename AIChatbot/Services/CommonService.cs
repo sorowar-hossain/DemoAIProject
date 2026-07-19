@@ -4,12 +4,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AIChatbot.Services
 {
     public class CommonService
     {
+        public static readonly Dictionary<string, string> TechnologyMap =
+                      new(StringComparer.OrdinalIgnoreCase)
+                        {
+                            { "C#", "csharp" },
+                            { "C++", "cpp" },
+                            { ".NET", "dotnet" },
+                            { "ASP.NET Core", "aspnetcore" },
+                            { "ASP.NET", "aspnet" },
+                            { "SQL Server", "sqlserver" },
+                            { "Azure DevOps", "azuredevops" },
+                            { "Entity Framework Core", "entityframeworkcore" },
+                            { "Entity Framework", "entityframework" },
+                            { "Node.js", "nodejs" },
+                            { "React.js", "reactjs" },
+                            { "Vue.js", "vuejs" },
+                            { "Next.js", "nextjs" },
+                            { "Nuxt.js", "nuxtjs" },
+                            { "GitHub", "github" },
+                            { "Visual Studio", "visualstudio" }
+                        };
         public CommonService()
         {
 
@@ -375,5 +396,20 @@ namespace AIChatbot.Services
             return words;
         }
 
+
+        public string ReplaceTechnologiesWord(string text) 
+        {
+            foreach (var tech in TechnologyMap
+                .OrderByDescending(x => x.Key.Length))
+            {
+                text = Regex.Replace(
+                    text,
+                    Regex.Escape(tech.Key),
+                    tech.Value,
+                    RegexOptions.IgnoreCase);
+            }
+
+            return text;
+        }
     }
 }

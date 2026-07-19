@@ -1,0 +1,25 @@
+Name: Emily Davis
+
+Experience
+
+Python Developer (4 Years)
+
+Skills
+
+Python
+Django
+Flask
+PostgreSQL
+Redis
+Celery
+Docker
+Linux
+Git
+
+Education
+
+BSc in Information Technology
+
+Summary
+
+Python developer experienced in backend systems, automation, and RESTful APIs.

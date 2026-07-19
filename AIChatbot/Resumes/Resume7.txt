@@ -1,0 +1,25 @@
+Name: David Wilson
+
+Experience
+
+Machine Learning Engineer (3 Years)
+
+Skills
+
+Python
+Machine Learning
+TensorFlow
+Scikit-Learn
+Pandas
+NumPy
+NLP
+Deep Learning
+Data Analysis
+
+Education
+
+MSc in Artificial Intelligence
+
+Summary
+
+Machine Learning Engineer specializing in predictive models and natural language processing.

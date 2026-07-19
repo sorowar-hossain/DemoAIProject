@@ -1,0 +1,25 @@
+Name: Michael Brown
+
+Experience
+
+Java Backend Developer (6 Years)
+
+Skills
+
+Java
+Spring Boot
+Hibernate
+MySQL
+REST API
+Docker
+Kubernetes
+Kafka
+Git
+
+Education
+
+BSc in Computer Engineering
+
+Summary
+
+Backend developer with strong knowledge of Java microservices and cloud-native applications.
