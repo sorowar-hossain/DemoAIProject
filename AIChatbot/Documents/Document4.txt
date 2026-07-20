@@ -1,0 +1,9 @@
+DocumentId : 4
+
+Title
+PostgreSQL
+
+Content
+PostgreSQL is an open-source relational database.
+It supports advanced SQL features.
+It is known for reliability and extensibility.

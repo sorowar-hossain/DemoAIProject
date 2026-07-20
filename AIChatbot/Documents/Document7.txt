@@ -1,0 +1,9 @@
+DocumentId : 7
+
+Title
+Kubernetes
+
+Content
+Kubernetes manages containerized applications.
+It automates deployment and scaling.
+It provides service discovery and load balancing.

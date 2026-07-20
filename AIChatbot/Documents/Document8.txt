@@ -1,0 +1,9 @@
+DocumentId : 8
+
+Title
+Azure
+
+Content
+Microsoft Azure is a cloud computing platform.
+It provides virtual machines and databases.
+Azure supports AI and machine learning services.

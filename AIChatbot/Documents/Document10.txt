@@ -1,0 +1,9 @@
+DocumentId : 10
+
+Title
+Natural Language Processing
+
+Content
+Natural language processing analyzes human language.
+It includes tokenization and text classification.
+NLP is used in chatbots and search engines.

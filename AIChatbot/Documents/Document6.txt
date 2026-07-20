@@ -1,0 +1,9 @@
+DocumentId : 6
+
+Title
+Docker
+
+Content
+Docker is a containerization platform.
+Containers package applications with dependencies.
+Docker simplifies deployment across environments.

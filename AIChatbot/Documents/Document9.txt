@@ -1,0 +1,9 @@
+DocumentId : 9
+
+Title
+Machine Learning
+
+Content
+Machine learning enables computers to learn from data.
+Models improve through training.
+It is used for prediction and classification.

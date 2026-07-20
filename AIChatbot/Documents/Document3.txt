@@ -1,0 +1,9 @@
+DocumentId : 3
+
+Title
+SQL Server
+
+Content
+SQL Server is a relational database.
+It supports stored procedures.
+Indexes improve performance.

@@ -1,0 +1,9 @@
+DocumentId : 1
+
+Title
+Learning C#
+
+Content
+C# is a modern programming language.
+It supports object-oriented programming.
+It is widely used with ASP.NET Core.

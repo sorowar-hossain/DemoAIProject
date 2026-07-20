@@ -109,11 +109,18 @@ commonsrv.N_Gram(lemms);
     Console.WriteLine(res);
  */
 
-ResumeSearchEngineService resumeSearchEngineService = new ResumeSearchEngineService();
-string question = "senior c# developer with sql and azure";
-Console.WriteLine(question);
+/*
+    ResumeSearchEngineService resumeSearchEngineService = new ResumeSearchEngineService();
+    string question = "senior c# developer with sql and azure";
+    Console.WriteLine(question);
+    Console.WriteLine("-------------------");
+    var response = resumeSearchEngineService.GetResumes(question);
+ */
+SimilarDocumentFinderService similarDocumentFinderService = new SimilarDocumentFinderService(); 
+string document = "document1.txt"; 
+Console.WriteLine(document);
 Console.WriteLine("-------------------");
-var response = resumeSearchEngineService.GetResumes(question);
+var response = similarDocumentFinderService.GetSimilarDocuments(document);
 
 
 Console.ReadKey();

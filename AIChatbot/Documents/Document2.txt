@@ -1,0 +1,9 @@
+DocumentId : 2
+
+Title
+ASP.NET Core
+
+Content
+ASP.NET Core is used to build web applications.
+C# is the primary language.
+It supports dependency injection.
