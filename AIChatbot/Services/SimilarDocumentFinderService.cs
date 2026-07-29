@@ -9,14 +9,14 @@ namespace AIChatbot.Services
 {
     public class SimilarDocumentFinderService
     {
-        List<Document> documents = new(); 
+        List<Document> documents = new();
         List<string> vocabulary = new();
         CommonService commonService;
         public SimilarDocumentFinderService()
         {
             commonService = new CommonService();
             documents = LoadDocuments();
-        } 
+        }
 
         public List<Document> LoadDocuments()
         {
@@ -25,7 +25,7 @@ namespace AIChatbot.Services
 
             string[] files = Directory.GetFiles(folder, "*.txt");
 
-            int id = 1; 
+            int id = 1;
 
             foreach (string file in files)
             {
@@ -33,7 +33,8 @@ namespace AIChatbot.Services
                 {
                     Id = id++,
                     Title = Path.GetFileName(file),
-                    Content = File.ReadAllText(file)
+                    Content = File.ReadAllText(file),
+                    //Tokens= Preprocess( File.ReadAllText(file))
                 });
             }
 
@@ -48,58 +49,58 @@ namespace AIChatbot.Services
                 .OrderBy(x => x)
                 .ToList();
         }
-        public List<string> GetSimilarDocuments(string document) 
+        public List<string> GetSimilarDocuments(string document)
         {
-            List<Document> normalizeddocuments = new();
-
             // Query
+            // if input type is a document name
+            //var queryDocument = documents.Where(x => x.Title.ToLower() == document.ToLower()).ToArray().FirstOrDefault();
+            //var normalizedContent= commonService.ReplaceTechnologiesWord(queryDocument.Content);
 
-            
-            var lemmas = Preprocess(document);
+            var normalizedContent = commonService.ReplaceTechnologiesWord(document);
+            var lemmas = Preprocess(normalizedContent);
+
             Dictionary<string, double> tf = commonService.CalculateTF(lemmas);
             // Resumes list
 
             foreach (var resume in documents)
             {
-                string normalizedContent = commonService.ReplaceTechnologiesWord(resume.Content);
+                normalizedContent = commonService.ReplaceTechnologiesWord(resume.Content);
                 resume.Tokens = Preprocess(normalizedContent);
                 resume.TF = commonService.CalculateTF(resume.Tokens);
-
-                normalizeddocuments.Add(resume);
             }
 
 
-            List<List<string>> allDocuments = normalizeddocuments
+            List<List<string>> allDocuments = documents
                                               .Select(r => r.Tokens)
                                               .ToList();
             Dictionary<string, double> idf = commonService.CalculateIDF(allDocuments);
 
-            foreach (var resume in normalizeddocuments)
+            foreach (var resume in documents)
             {
                 resume.TFIDF = commonService.CalculateTFIDF(resume.TF, idf);
             }
 
             Dictionary<string, double> queryTFIDF = commonService.CalculateTFIDF(tf, idf);
 
-            vocabulary = BuildVocabulary(normalizeddocuments);
+            vocabulary = BuildVocabulary(documents);
 
             double[] queryVector = commonService.CreateVector(queryTFIDF, vocabulary);
 
-            foreach (var resume in normalizeddocuments)
+            foreach (var resume in documents)
             {
                 double[] resumeVector = commonService.CreateVector(resume.TFIDF, vocabulary);
 
                 resume.Score = commonService.CalculateCosineSimilarity(queryVector, resumeVector);
             }
 
-            var result = normalizeddocuments
+            var result = documents
                         .OrderByDescending(x => x.Score)
                         .ToList();
 
-            //foreach (var resume in result)
-            //{
-            //    Console.WriteLine($"{resume.FileName} : {resume.Score:F4}");
-            //}
+            foreach (var resume in result)
+            {
+                Console.WriteLine($"{resume.Title} : {resume.Score:F4}");
+            }
             return null;
         }
 

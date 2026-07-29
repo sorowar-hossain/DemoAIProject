@@ -116,11 +116,13 @@ commonsrv.N_Gram(lemms);
     Console.WriteLine("-------------------");
     var response = resumeSearchEngineService.GetResumes(question);
  */
-SimilarDocumentFinderService similarDocumentFinderService = new SimilarDocumentFinderService(); 
-string document = "document1.txt"; 
+SimilarDocumentFinderService similarDocumentFinderService = new SimilarDocumentFinderService();
+string document = "PostgreSQL";
 Console.WriteLine(document);
 Console.WriteLine("-------------------");
 var response = similarDocumentFinderService.GetSimilarDocuments(document);
 
 
 Console.ReadKey();
+
+

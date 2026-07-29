@@ -83,12 +83,25 @@ namespace AIChatbot.Services
          */
         public string NormalizeText(string text)
         {
+            if (string.IsNullOrWhiteSpace(text))
+                return string.Empty;
+
+            // Convert all whitespace (newline, tab, etc.) to a single space
+            text = text.Replace("\r", " ")
+                       .Replace("\n", " ")
+                       .Replace("\t", " ");
+
+            // Lowercase and remove punctuation
             string cleaned = new string(
-                text.ToLower()
+                text.ToLowerInvariant()
                     .Select(c => char.IsPunctuation(c) ? ' ' : c)
                     .ToArray());
-            cleaned = string.Join(" ", cleaned.Split(' ', StringSplitOptions.RemoveEmptyEntries));
-            return cleaned;
+
+            // Remove extra spaces
+            cleaned = string.Join(" ",
+                cleaned.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+
+            return cleaned.Trim();
         }
 
         //=========normalization => Tokenization ===========
