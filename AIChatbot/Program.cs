@@ -116,12 +116,21 @@ commonsrv.N_Gram(lemms);
     Console.WriteLine("-------------------");
     var response = resumeSearchEngineService.GetResumes(question);
  */
-SimilarDocumentFinderService similarDocumentFinderService = new SimilarDocumentFinderService();
-string document = "PostgreSQL";
-Console.WriteLine(document);
-Console.WriteLine("-------------------");
-var response = similarDocumentFinderService.GetSimilarDocuments(document);
+/*
+    SimilarDocumentFinderService similarDocumentFinderService = new SimilarDocumentFinderService();
+    string document = "PostgreSQL";
+    Console.WriteLine(document);
+    Console.WriteLine("-------------------");
+    var response = similarDocumentFinderService.GetSimilarDocuments(document);
+ */
 
+
+
+SpamDetectionService spamDetectionService = new SpamDetectionService(); 
+string query = "You w1n A lotery? Click here..!";
+Console.WriteLine(query);
+Console.WriteLine("-------------------");
+var response = spamDetectionService.DtectionSpam(query);
 
 Console.ReadKey();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AIChatbot.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -337,6 +338,44 @@ namespace AIChatbot.Services
 
             return idf;
         }
+
+        public Dictionary<string, double> CalculateIDF_FromList<T>( List<T> data,List<string> vocabulary, Func<T, string> textSelector)
+        {
+            int totalDocuments = data.Count;
+
+            // Initialize DF dictionary
+            Dictionary<string, int> documentFrequency = vocabulary
+                                                .ToDictionary(word => word, word => 0);
+
+            foreach (var item in data)
+            {
+                // Preprocess only once
+                var words = Preprocess(textSelector(item));
+
+                // Remove duplicates inside one document
+                HashSet<string> uniqueWords = new(words);
+
+                foreach (var word in uniqueWords)
+                {
+                    if (documentFrequency.ContainsKey(word))
+                    {
+                        documentFrequency[word]++;
+                    }
+                }
+            }
+
+            Dictionary<string, double> idf = new();
+
+            foreach (var kv in documentFrequency)
+            {
+                idf[kv.Key] = kv.Value == 0
+                    ? 0
+                    : Math.Log((double)totalDocuments / kv.Value);
+            }
+
+            return idf;
+        }
+
 
         //This preprocessing happens once when the application starts.
         public Dictionary<string, double> CalculateTFIDF( Dictionary<string, double> tf, Dictionary<string, double> idf)

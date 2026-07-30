@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="Data\knowledge.json" />
     <None Remove="Data\lemma.json" />
+    <None Remove="Data\spam_dataset_1000.json" />
     <None Remove="Resumes\Resume1.txt" />
     <None Remove="Resumes\Resume10.txt" />
     <None Remove="Resumes\Resume2.txt" />
@@ -33,6 +34,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\lemma.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\spam_dataset_1000.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Documents\Document10.txt">
