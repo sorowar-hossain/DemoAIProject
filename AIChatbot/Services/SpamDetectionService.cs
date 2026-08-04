@@ -14,8 +14,10 @@ namespace AIChatbot.Services
         List<SpamData> spamData;
         List<string> vocabulary = new();
         CommonService commonService;
+        private NaiveBayesService naiveBayesService;
         public SpamDetectionService()
         {
+            naiveBayesService = new NaiveBayesService();
             commonService = new CommonService();
             LoadData();
         }
@@ -75,7 +77,14 @@ namespace AIChatbot.Services
             // x => x.Text, is a lambda expression and call for each data of spamData
             Dictionary<string,double> idf = commonService.CalculateIDF_FromList(spamData,vocabulary, x => x.Text);
             Dictionary<string, double> tf_idf = commonService.CalculateTFIDF(tf,idf);
-            return "On Processing";
+
+            naiveBayesService.Train(spamData,vocabulary);
+            var processText = commonService.CorrectSentence(question,vocabulary);
+           var res= naiveBayesService.Predict("Congratulations! You won a free lottery.");
+           var res2 = naiveBayesService.Predict("Please attend the project meeting tomorrow.");
+            
+
+            return res;
         }
 
         public List<string> Preprocess(string text)

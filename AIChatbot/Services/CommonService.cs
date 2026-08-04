@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -431,7 +432,7 @@ namespace AIChatbot.Services
             return dotProduct / (Math.Sqrt(magnitude1) * Math.Sqrt(magnitude2));
         }
 
-        public List<string> Preprocess(string question)
+        public List<string> Preprocess(string question)  
         {
             // Step 1
             string normalized = NormalizeText(question);
@@ -463,5 +464,90 @@ namespace AIChatbot.Services
 
             return text;
         }
+
+        /*
+            ✅ Easy to understand
+            ✅ Written entirely in C#
+            ✅ No external libraries required
+            ✅ Common interview topic
+            ✅ Good for learning NLP
+         
+         */
+        public static int LevenshteinDistance(string source, string target)
+        {
+            if (string.IsNullOrEmpty(source))
+                return target?.Length ?? 0;
+
+            if (string.IsNullOrEmpty(target))
+                return source.Length;
+
+            int[,] distance = new int[source.Length + 1, target.Length + 1];
+
+            // Initialize first row and column
+            for (int i = 0; i <= source.Length; i++)
+                distance[i, 0] = i;
+
+            for (int j = 0; j <= target.Length; j++)
+                distance[0, j] = j;
+
+            // Calculate distance
+            for (int i = 1; i <= source.Length; i++)
+            {
+                for (int j = 1; j <= target.Length; j++)
+                {
+                    int cost = source[i - 1] == target[j - 1] ? 0 : 1;
+
+                    distance[i, j] = Math.Min(
+                        Math.Min(
+                            distance[i - 1, j] + 1,
+                            distance[i, j - 1] + 1),
+                        distance[i - 1, j - 1] + cost);
+                }
+            }
+
+            return distance[source.Length, target.Length];
+        }
+
+        public string CorrectSentence(string sentence, List<string> vocabulary)
+        {
+            if (string.IsNullOrWhiteSpace(sentence))
+                return sentence;
+
+            var words = Preprocess(sentence);
+
+            List<string> correctedWords = new();
+
+            foreach (string word in words)
+            {
+                string corrected = CorrectWord(word, vocabulary);
+                correctedWords.Add(corrected);
+            }
+
+            return string.Join(" ", correctedWords);
+        }
+
+
+        public string CorrectWord(string word, List<string> vocabulary)
+        {
+            if (vocabulary.Contains(word))
+                return word;
+
+            int minDistance = int.MaxValue;
+            string bestMatch = word;
+
+            foreach (string vocabWord in vocabulary)
+            {
+                int distance = LevenshteinDistance(word, vocabWord);
+
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    bestMatch = vocabWord;
+                }
+            }
+
+            return minDistance <= 2 ? bestMatch : word;
+        }
+
     }
 }
