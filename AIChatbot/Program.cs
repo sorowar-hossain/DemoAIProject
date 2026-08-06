@@ -124,13 +124,22 @@ commonsrv.N_Gram(lemms);
     var response = similarDocumentFinderService.GetSimilarDocuments(document);
  */
 
+/*
+    SpamDetectionService spamDetectionService = new SpamDetectionService(); 
+    string query = "You w1n A lotery? Click here..!";
+    Console.WriteLine(query);
+    Console.WriteLine("-------------------");
+    var response = spamDetectionService.DtectionSpam(query);
+ 
+ */
 
-
-SpamDetectionService spamDetectionService = new SpamDetectionService(); 
-string query = "You w1n A lotery? Click here..!";
+SentimentAnalysisService service = new SentimentAnalysisService();
+string query = "I absolutely love this phone.";
 Console.WriteLine(query);
 Console.WriteLine("-------------------");
-var response = spamDetectionService.DtectionSpam(query);
+var response = service.SentimentAnalysis(query);
+Console.WriteLine(response.Sentiment);
+
 
 Console.ReadKey();
 

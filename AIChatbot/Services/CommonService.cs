@@ -37,44 +37,62 @@ namespace AIChatbot.Services
         {
 
         }
-        public HashSet<string> stopWords =
-        new()
-           {
-                 // Articles
-                    "a", "an", "the",
-                 // Pronouns
-                    "i", "me", "my", "mine",
-                    "you", "your", "yours",
-                    "he", "him", "his",
-                    "she", "her", "hers",
-                    "it", "its",
-                    "we", "us", "our", "ours",
-                    "they", "them", "their", "theirs",
-               // Be verbs
-                    "am", "is", "are", "was", "were", "be", "been", "being",
+        public readonly HashSet<string> stopWords = new() 
+            {
+                // Articles
+                "a", "an", "the",
 
-                // Auxiliary verbs
-                    "do", "does", "did",
-                    "have", "has", "had",
+                // Personal Pronouns
+                "i", "me", "my", "mine",
+                "you", "your", "yours",
+                "he", "him", "his",
+                "she", "her", "hers",
+                "it", "its",
+                "we", "us", "our", "ours",
+                "they", "them", "their", "theirs",
 
-                // Modal verbs
-                "can", "could", "will", "would",
-                "shall", "should",
-                "may", "might", "must",
+                // Demonstratives
+                "this", "that", "these", "those",
 
-                // Common question words
-                "how", "what", "when", "where",
+                // Be Verbs
+                "am", "is", "are", "was", "were",
+                "be", "been", "being",
+
+                // Auxiliary Verbs
+                "do", "does", "did",
+                "have", "has", "had",
+
+                // Question Words
+                "what", "when", "where",
                 "which", "who", "whom", "whose",
-                "why",
+                "how", "why",
+
+                // Determiners / Quantifiers
+                "all", "any", "both", "each", "every",
+                "either", "neither", "some",
+                "many", "few", "another",
+                "other", "others", "same", "such",
+
+                // Time / Place
+                "here", "there",
+                "today", "tomorrow", "yesterday",
 
                 // Prepositions
                 "of", "to", "for", "at", "in", "on",
                 "by", "with", "from", "into", "onto",
                 "over", "under", "between", "through",
+                "about", "above", "across", "after",
+                "against", "along", "around", "before",
+                "behind", "below", "beside", "beyond",
+                "during", "inside", "outside", "near",
+                "within",
 
                 // Conjunctions
-                "and", "or", "but", "if", "than", "then", "as"
-           };
+                "and", "or", "but", "if", "than", "then", "as",
+
+                // Miscellaneous
+                "own", "once", "again"
+            };
         private Dictionary<string, string> _dictionary;
         //=========Text normalization ===========
         /*

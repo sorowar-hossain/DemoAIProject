@@ -1,0 +1,18 @@
+[
+  {
+    "text": "I love this phone.",
+    "sentiment": "Positive"
+  },
+  {
+    "text": "Battery life is excellent.",
+    "sentiment": "Positive"
+  },
+  {
+    "text": "This phone is terrible.",
+    "sentiment": "Negative"
+  },
+  {
+    "text": "The package arrived today.",
+    "sentiment": "Neutral"
+  }
+]
