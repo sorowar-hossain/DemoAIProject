@@ -133,12 +133,21 @@ commonsrv.N_Gram(lemms);
  
  */
 
-SentimentAnalysisService service = new SentimentAnalysisService();
-string query = "I absolutely love this phone.";
+/*
+    SentimentAnalysisService service = new SentimentAnalysisService();
+    string query = "I absolutely love this phone.";
+    Console.WriteLine(query);
+    Console.WriteLine("-------------------");
+    var response = service.SentimentAnalysis(query);
+    Console.WriteLine(response.Sentiment);
+ */
+
+IntentClassificationService service = new IntentClassificationService();
+string query = "When i will get my money.";
 Console.WriteLine(query);
 Console.WriteLine("-------------------");
-var response = service.SentimentAnalysis(query);
-Console.WriteLine(response.Sentiment);
+var response = service.GetIntent(query);
+Console.WriteLine(response);
 
 
 Console.ReadKey();

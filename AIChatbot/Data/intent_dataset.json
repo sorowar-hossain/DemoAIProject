@@ -1,0 +1,129 @@
+[
+  {
+    "Text": "Hello",
+    "Intent": "Greeting"
+  },
+  {
+    "Text": "Hi",
+    "Intent": "Greeting"
+  },
+  {
+    "Text": "Good morning",
+    "Intent": "Greeting"
+  },
+  {
+    "Text": "Hey there",
+    "Intent": "Greeting"
+  },
+
+  {
+    "Text": "Where is my order",
+    "Intent": "TrackOrder"
+  },
+  {
+    "Text": "Track my order",
+    "Intent": "TrackOrder"
+  },
+  {
+    "Text": "Where is my package",
+    "Intent": "TrackOrder"
+  },
+  {
+    "Text": "Can I track my delivery",
+    "Intent": "TrackOrder"
+  },
+
+  {
+    "Text": "I want to cancel my order",
+    "Intent": "CancelOrder"
+  },
+  {
+    "Text": "Cancel my order",
+    "Intent": "CancelOrder"
+  },
+  {
+    "Text": "I don't want my order",
+    "Intent": "CancelOrder"
+  },
+  {
+    "Text": "Please cancel the order",
+    "Intent": "CancelOrder"
+  },
+
+  {
+    "Text": "I want a refund",
+    "Intent": "Refund"
+  },
+  {
+    "Text": "I want to get my money back",
+    "Intent": "Refund"
+  },
+  {
+    "Text": "Give me my money back",
+    "Intent": "Refund"
+  },
+  {
+    "Text": "How can I get a refund",
+    "Intent": "Refund"
+  },
+  {
+    "Text": "I need to return my money",
+    "Intent": "Refund"
+  },
+
+  {
+    "Text": "How can I pay",
+    "Intent": "Payment"
+  },
+  {
+    "Text": "What payment methods do you accept",
+    "Intent": "Payment"
+  },
+  {
+    "Text": "Can I pay with Visa",
+    "Intent": "Payment"
+  },
+  {
+    "Text": "Do you accept credit cards",
+    "Intent": "Payment"
+  },
+
+  {
+    "Text": "How long will delivery take",
+    "Intent": "Shipping"
+  },
+  {
+    "Text": "What are your shipping options",
+    "Intent": "Shipping"
+  },
+  {
+    "Text": "When will my package arrive",
+    "Intent": "Shipping"
+  },
+
+  {
+    "Text": "Tell me about this product",
+    "Intent": "ProductInfo"
+  },
+  {
+    "Text": "What is this product",
+    "Intent": "ProductInfo"
+  },
+  {
+    "Text": "Give me product information",
+    "Intent": "ProductInfo"
+  },
+
+  {
+    "Text": "I am not happy with your service",
+    "Intent": "Complaint"
+  },
+  {
+    "Text": "Your service is terrible",
+    "Intent": "Complaint"
+  },
+  {
+    "Text": "I want to make a complaint",
+    "Intent": "Complaint"
+  }
+]

@@ -30,6 +30,9 @@
     <Content Include="Data\faqs.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\intent_dataset.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\sentiment_dataset.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
