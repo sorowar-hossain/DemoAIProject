@@ -450,6 +450,35 @@ namespace AIChatbot.Services
             return dotProduct / (Math.Sqrt(magnitude1) * Math.Sqrt(magnitude2));
         }
 
+        public double CosineSimilarity( Dictionary<string, double> queryVector, Dictionary<string, double> documentVector)
+        {
+            double dotProduct = 0;
+            double queryMagnitude = 0;
+            double documentMagnitude = 0;
+
+            foreach (var item in queryVector)
+            {
+                queryMagnitude += item.Value * item.Value;
+
+                if (documentVector.TryGetValue(item.Key, out double documentValue))
+                {
+                    dotProduct += item.Value * documentValue;
+                }
+            }
+
+            foreach (var item in documentVector)
+            {
+                documentMagnitude += item.Value * item.Value;
+            }
+
+            if (queryMagnitude == 0 || documentMagnitude == 0)
+                return 0;
+
+            return dotProduct /
+                   (Math.Sqrt(queryMagnitude) *
+                    Math.Sqrt(documentMagnitude));
+        }
+
         public List<string> Preprocess(string question)  
         {
             // Step 1

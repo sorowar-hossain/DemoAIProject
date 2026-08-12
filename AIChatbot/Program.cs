@@ -142,12 +142,23 @@ commonsrv.N_Gram(lemms);
     Console.WriteLine(response.Sentiment);
  */
 
-IntentClassificationService service = new IntentClassificationService();
-string query = "When i will get my money.";
+/*
+    IntentClassificationService service = new IntentClassificationService();
+    string query = "When i will get my money.";
+    Console.WriteLine(query);
+    Console.WriteLine("-------------------");
+    var response = service.GetIntent(query);
+    Console.WriteLine(response);
+*/
+SemanticSearchService service = new SemanticSearchService();
+string query = "I cannot remember my login password.";
 Console.WriteLine(query);
 Console.WriteLine("-------------------");
-var response = service.GetIntent(query);
-Console.WriteLine(response);
+var response = service.SemanticSearch(query);
+
+Console.WriteLine("Answer: "+response);
+       
+
 
 
 Console.ReadKey();

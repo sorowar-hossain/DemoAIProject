@@ -33,6 +33,9 @@
     <Content Include="Data\intent_dataset.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\semantic_search_dataset.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\sentiment_dataset.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

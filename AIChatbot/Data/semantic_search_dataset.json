@@ -1,0 +1,177 @@
+[
+  {
+    "Id": 1,
+    "Title": "Password Reset",
+    "Content": "You can reset your password from the account settings page."
+  },
+  {
+    "Id": 2,
+    "Title": "Forgot Password",
+    "Content": "If you forgot your password, you can reset it using the password recovery option."
+  },
+  {
+    "Id": 3,
+    "Title": "Change Password",
+    "Content": "You can change your existing password from your account security settings."
+  },
+  {
+    "Id": 4,
+    "Title": "Password Recovery",
+    "Content": "Users who cannot remember their password can recover their account using the password recovery process."
+  },
+  {
+    "Id": 5,
+    "Title": "Change Email",
+    "Content": "You can change your email address from your profile settings."
+  },
+  {
+    "Id": 6,
+    "Title": "Update Email Address",
+    "Content": "Your registered email address can be updated from the account profile page."
+  },
+  {
+    "Id": 7,
+    "Title": "Email Verification",
+    "Content": "After changing your email address, you may need to verify the new email."
+  },
+  {
+    "Id": 8,
+    "Title": "Apply for Leave",
+    "Content": "Employees can apply for annual leave using the leave management system."
+  },
+  {
+    "Id": 9,
+    "Title": "Annual Leave",
+    "Content": "Annual leave requests should be submitted through the employee leave portal."
+  },
+  {
+    "Id": 10,
+    "Title": "Sick Leave",
+    "Content": "Employees can submit sick leave requests through the leave management system."
+  },
+  {
+    "Id": 11,
+    "Title": "Leave Approval",
+    "Content": "Employees can check whether their leave request has been approved from the leave management system."
+  },
+  {
+    "Id": 12,
+    "Title": "Leave Balance",
+    "Content": "Your remaining annual leave balance can be viewed from the employee portal."
+  },
+  {
+    "Id": 13,
+    "Title": "Salary Information",
+    "Content": "Employees can view their salary information from the payroll system."
+  },
+  {
+    "Id": 14,
+    "Title": "Salary Slip",
+    "Content": "Monthly salary slips are available through the employee payroll portal."
+  },
+  {
+    "Id": 15,
+    "Title": "Payroll Date",
+    "Content": "Employee salaries are processed and deposited according to the monthly payroll schedule."
+  },
+  {
+    "Id": 16,
+    "Title": "Salary Deduction",
+    "Content": "Details about salary deductions can be found on your monthly salary statement."
+  },
+  {
+    "Id": 17,
+    "Title": "Order Tracking",
+    "Content": "You can track your order from the order history page."
+  },
+  {
+    "Id": 18,
+    "Title": "Delivery Status",
+    "Content": "The current delivery status of your package is available in your order details."
+  },
+  {
+    "Id": 19,
+    "Title": "Late Delivery",
+    "Content": "If your order has not arrived on time, check the latest shipping and delivery information."
+  },
+  {
+    "Id": 20,
+    "Title": "Expected Delivery",
+    "Content": "The estimated delivery date can be found in the order tracking information."
+  },
+  {
+    "Id": 21,
+    "Title": "Payment Methods",
+    "Content": "We accept credit cards, debit cards, and supported online payment methods."
+  },
+  {
+    "Id": 22,
+    "Title": "Credit Card Payment",
+    "Content": "You can pay for your order using a supported credit card."
+  },
+  {
+    "Id": 23,
+    "Title": "Payment Failed",
+    "Content": "If your payment fails, verify your payment details and try the transaction again."
+  },
+  {
+    "Id": 24,
+    "Title": "Refund Request",
+    "Content": "You can request a refund from the order details page."
+  },
+  {
+    "Id": 25,
+    "Title": "Money Back",
+    "Content": "Customers can request their money back for eligible purchases."
+  },
+  {
+    "Id": 26,
+    "Title": "Refund Status",
+    "Content": "You can check the status of your refund from your order history."
+  },
+  {
+    "Id": 27,
+    "Title": "Cancel Order",
+    "Content": "You can cancel an order from the order management page before it is shipped."
+  },
+  {
+    "Id": 28,
+    "Title": "Order Cancellation",
+    "Content": "Customers can request cancellation of an order before the shipping process begins."
+  },
+  {
+    "Id": 29,
+    "Title": "Customer Support",
+    "Content": "You can contact customer support through the help center."
+  },
+  {
+    "Id": 30,
+    "Title": "Contact Support",
+    "Content": "If you need assistance, contact a support representative through the customer service portal."
+  },
+  {
+    "Id": 31,
+    "Title": "Support Hours",
+    "Content": "Customer support is available from 9 AM to 6 PM on business days."
+  },
+  {
+    "Id": 32,
+    "Title": "Create Account",
+    "Content": "You can create a new account by completing the registration form."
+  },
+  {
+    "Id": 33,
+    "Title": "User Registration",
+    "Content": "New users must register an account before they can access the application."
+  },
+  {
+    "Id": 34,
+    "Title": "Account Activation",
+    "Content": "After registration, users must activate their account using the verification email."
+  },
+  {
+    "Id": 35,
+    "Title": "Delete Account",
+    "Content": "You can permanently delete your account from the account settings page."
+  }
+]
