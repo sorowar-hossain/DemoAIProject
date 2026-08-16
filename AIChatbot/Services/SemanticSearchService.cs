@@ -103,7 +103,7 @@ namespace AIChatbot.Services
 
             var rankedResults = results
                                 .OrderByDescending(x => x.Score)
-                                .ToList();
+                                .Take(3).ToList();
             var output = rankedResults.FirstOrDefault();
             var answer = dataList.Where(x => x.Id == output.Id).Select(x => x.Content).FirstOrDefault();
 
