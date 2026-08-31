@@ -1,0 +1,27 @@
+[
+  {
+    "Id": 1,
+    "Title": "Password Reset",
+    "Content": "You can reset your password from the account settings page."
+  },
+  {
+    "Id": 2,
+    "Title": "Change Email",
+    "Content": "You can change your email address from your profile settings."
+  },
+  {
+    "Id": 3,
+    "Title": "Apply Leave",
+    "Content": "Employees can apply for annual leave using the leave management system."
+  },
+  {
+    "Id": 4,
+    "Title": "Salary Information",
+    "Content": "Employees can view their salary information from the payroll system."
+  },
+  {
+    "Id": 5,
+    "Title": "Forgot Password",
+    "Content": "If you forgot your password, you can reset it using the password recovery option."
+  }
+]

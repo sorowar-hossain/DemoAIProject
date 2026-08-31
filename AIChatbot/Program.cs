@@ -150,14 +150,34 @@ commonsrv.N_Gram(lemms);
     var response = service.GetIntent(query);
     Console.WriteLine(response);
 */
-SemanticSearchService service = new SemanticSearchService();
-string query = "I cannot remember my login password.";
-Console.WriteLine(query);
-Console.WriteLine("-------------------");
-var response = service.SemanticSearch(query);
 
-Console.WriteLine("Answer: "+response);
-       
+/*
+     SemanticSearchService service = new SemanticSearchService();
+    string query = "I cannot remember my login password.";
+    Console.WriteLine(query);
+    Console.WriteLine("-------------------");
+    var response = service.SemanticSearch(query);
+ */
+
+
+
+var embeddingService = new EmbeddingService();
+
+// Model testing
+//embeddingService.PrintModelInfo();
+await embeddingService.InitializeAsync();
+
+string document ="I cannot remember my password";
+Console.WriteLine("Question\n"+document);
+var  vector =
+    embeddingService.SearchEbedding(document,5);
+
+
+
+Console.WriteLine();
+
+
+
 
 
 
