@@ -35,6 +35,9 @@
     <Content Include="Data\intent_dataset.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\similar_document_embedding_dataset.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\semantic_embeding_dataset.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

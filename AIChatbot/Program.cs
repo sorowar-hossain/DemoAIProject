@@ -160,19 +160,23 @@ commonsrv.N_Gram(lemms);
  */
 
 
+/*
+     var embeddingService = new EmbeddingService();
 
-var embeddingService = new EmbeddingService();
+    // Model testing
+    //embeddingService.PrintModelInfo();
+    await embeddingService.InitializeAsync();
 
-// Model testing
-//embeddingService.PrintModelInfo();
+    string document ="I cannot remember my password";
+    Console.WriteLine("Question\n"+document);
+    var  vector =
+        embeddingService.SearchEbedding(document,5);
+ */
+
+
+var embeddingService = new SimilarDocumentFinderEbeddingService();
 await embeddingService.InitializeAsync();
-
-string document ="I cannot remember my password";
-Console.WriteLine("Question\n"+document);
-var  vector =
-    embeddingService.SearchEbedding(document,5);
-
-
+var res= embeddingService.SearchSimilarDocumentEbedding(1);
 
 Console.WriteLine();
 
