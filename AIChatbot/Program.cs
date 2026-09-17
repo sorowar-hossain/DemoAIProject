@@ -3,7 +3,10 @@
 using AIChatbot;
 using AIChatbot.Models;
 using AIChatbot.Services;
+using System.Diagnostics.Metrics;
 using System.Numerics;
+using UglyToad.PdfPig.Graphics;
+using static System.Net.Mime.MediaTypeNames;
 // Rule based chatbot
 RuleBasedChatbot ruleBasedChatbot = new RuleBasedChatbot();
 //ruleBasedChatbot.StartChat();
@@ -173,16 +176,21 @@ commonsrv.N_Gram(lemms);
         embeddingService.SearchEbedding(document,5);
  */
 
+/*
+    var embeddingService = new SimilarDocumentFinderEbeddingService();
+    await embeddingService.InitializeAsync();
+    var res= embeddingService.SearchSimilarDocumentEbedding(1);
+ 
+ */
 
-var embeddingService = new SimilarDocumentFinderEbeddingService();
-await embeddingService.InitializeAsync();
-var res= embeddingService.SearchSimilarDocumentEbedding(1);
+
+PdfTextExtractor_RAG_Service service = new PdfTextExtractor_RAG_Service();
+ service.RAGChat("How to an employee view his salary?");
+
+
+
 
 Console.WriteLine();
-
-
-
-
 
 
 Console.ReadKey();

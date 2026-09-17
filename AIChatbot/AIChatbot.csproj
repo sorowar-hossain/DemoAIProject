@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="Data\knowledge.json" />
     <None Remove="Data\lemma.json" />
+    <None Remove="Data\RAG_Data.pdf" />
     <None Remove="Data\spam_dataset_1000.json" />
     <None Remove="Models\all-MiniLM-L6-v2\model.onnx" />
     <None Remove="Models\all-MiniLM-L6-v2\tokenizer.json" />
@@ -34,6 +35,9 @@
     </Content>
     <Content Include="Data\intent_dataset.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\RAG_Data.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\similar_document_embedding_dataset.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -126,6 +130,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.29.0" />
+    <PackageReference Include="PdfPig" Version="0.1.16" />
     <PackageReference Include="Tokenizers.HuggingFace" Version="3.23.1" />
   </ItemGroup>
 
