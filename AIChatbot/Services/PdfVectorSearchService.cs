@@ -17,9 +17,12 @@ namespace AIChatbot.Services
             this.chunks = chunks;
         }
 
-        public List<(DocumentChunk Chunk, double Score)> Search(double[] queryVector,int topK = 3)
+        public List<(DocumentChunk Chunk, double Score)> Search( double[] queryVector, int topK = 3)
         {
-            return chunks
+            Console.WriteLine();
+            Console.WriteLine("===== ALL CHUNK SIMILARITIES =====");
+
+            var results = chunks
                 .Where(x => x.Embedding.Length > 0)
                 .Select(x => (
                     Chunk: x,
@@ -27,11 +30,24 @@ namespace AIChatbot.Services
                         queryVector,
                         x.Embedding)))
                 .OrderByDescending(x => x.Score)
+                .ToList();
+
+            foreach (var result in results)
+            {
+                Console.WriteLine(
+                    $"Chunk {result.Chunk.Id,-3} | " +
+                    $"{result.Chunk.SectionTitle,-35} | " +
+                    $"{result.Score:F4}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("===== TOP RESULTS =====");
+
+            return results
                 .Take(topK)
                 .ToList();
         }
-
-        private double CalculateCosineSimilarity(
+        public double CalculateCosineSimilarity(
             double[] vector1,
             double[] vector2)
         {

@@ -10,5 +10,6 @@ namespace AIChatbot.Models
     {
         public int PageNumber { get; set; }
         public string Text { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
     }
 }

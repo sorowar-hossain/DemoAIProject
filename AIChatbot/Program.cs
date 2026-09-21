@@ -185,7 +185,7 @@ commonsrv.N_Gram(lemms);
 
 
 PdfTextExtractor_RAG_Service service = new PdfTextExtractor_RAG_Service();
- service.RAGChat("How to an employee view his salary?");
+ service.RAGChat("What should an employee do with company property before leaving?");
 
 
 

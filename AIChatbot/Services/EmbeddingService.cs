@@ -58,14 +58,14 @@ namespace AIChatbot.Services
             foreach (var document in dataList!)
             {
                 document.Embedding = GenerateEmbedding(document.Content);
-                Console.WriteLine($"Id: {document.Id}");
+                //Console.WriteLine($"Id: {document.Id}");
 
-                Console.WriteLine($"Title: {document.Title}");
-                Console.WriteLine($"Title: {document.Content}");
+                //Console.WriteLine($"Title: {document.Title}");
+                //Console.WriteLine($"Title: {document.Content}");
 
-                Console.WriteLine($"Vector Length: {document.Embedding?.Length}");
+                //Console.WriteLine($"Vector Length: {document.Embedding?.Length}");
 
-                Console.WriteLine();
+                //Console.WriteLine();
             }
         }
         public List<SemanticSearchResult> SearchEbedding(string query, int topK = 5) 

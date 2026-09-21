@@ -13,6 +13,7 @@ namespace AIChatbot.Models
         public int PageNumber { get; set; }
 
         public string Text { get; set; } = string.Empty;
-        public double[] Embedding {  get; set; }    
+        public double[] Embedding {  get; set; }
+        public string SectionTitle { get; internal set; }
     }
 }

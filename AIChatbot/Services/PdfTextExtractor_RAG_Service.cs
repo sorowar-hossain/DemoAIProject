@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UglyToad.PdfPig;
+using UglyToad.PdfPig.Actions;
 
 namespace AIChatbot.Services
 {
@@ -16,7 +18,7 @@ namespace AIChatbot.Services
         public PdfTextExtractor_RAG_Service()
         {
             embeddingService = new EmbeddingService();
-            embeddingService.InitializeAsync();
+            
         }
         public async Task<List<PdfPage>> ExtractText()
         {
@@ -45,7 +47,6 @@ namespace AIChatbot.Services
                 Console.WriteLine("Page No: " + page.PageNumber);
                 Console.WriteLine(page.Text);
                 Console.WriteLine();
-
             }
 
 
@@ -124,63 +125,220 @@ namespace AIChatbot.Services
 
             Some content appears in both chunks.
          */
-        public async Task<List<DocumentChunk>> CreateChunks(List<PdfPage> pages,int chunkSize = 500, int overlap = 100)
+        // =========================================================
+        // 4. CREATE CHUNKS
+        // =========================================================
+
+        public Task<List<DocumentChunk>> CreateChunks(
+            List<PdfPage> pages,
+            int maxWords = 200,
+            int overlapWords = 50)
         {
-          chunks.Clear();
+          
+
             int chunkId = 1;
 
             foreach (var page in pages)
             {
-                string text = page.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(text))
+                if (string.IsNullOrWhiteSpace(page.Text))
                     continue;
 
-                int start = 0;
+                // Normalize PDF text
+                string normalizedText =
+                    NormalizePdfText(page.Text);
 
-                while (start < text.Length)
+                if (string.IsNullOrWhiteSpace(normalizedText))
+                    continue;
+
+                // Detect sections
+                var sections =
+                    SplitIntoSections(normalizedText);
+
+                foreach (var section in sections)
                 {
-                    int length = Math.Min(
-                        chunkSize,
-                        text.Length - start);
+                    var words = section.Text
+                        .Split(
+                            ' ',
+                            StringSplitOptions.RemoveEmptyEntries)
+                        .ToList();
 
-                    string chunkText = text
-                        .Substring(start, length)
-                        .Trim();
+                    if (words.Count == 0)
+                        continue;
 
-                    if (!string.IsNullOrWhiteSpace(chunkText))
+                    int start = 0;
+
+                    while (start < words.Count)
                     {
-                        chunks.Add(new DocumentChunk
-                        {
-                            Id = chunkId++,
-                            PageNumber = page.PageNumber,
-                            Text = chunkText
-                        });
-                    }
+                        int count =
+                            Math.Min(
+                                maxWords,
+                                words.Count - start);
 
-                    start += chunkSize - overlap;
+                        var chunkWords =
+                            words
+                                .Skip(start)
+                                .Take(count)
+                                .ToList();
+
+                        AddChunk(
+                            chunks,
+                            ref chunkId,
+                            page.PageNumber,
+                            section.Title,
+                            chunkWords);
+
+                        /*
+                         * Stop if this was the final chunk.
+                         */
+                        if (start + count >= words.Count)
+                            break;
+
+                        /*
+                         * Move forward while keeping overlap.
+                         *
+                         * Example:
+                         *
+                         * maxWords = 300
+                         * overlap = 50
+                         *
+                         * Chunk 1: words 1 - 300
+                         * Chunk 2: words 251 - 550
+                         * Chunk 3: words 501 - 800
+                         */
+
+                        start +=
+                            maxWords - overlapWords;
+                    }
                 }
             }
 
-            Console.WriteLine($"Total Chunks: {chunks.Count}");
+            Console.WriteLine();
+            Console.WriteLine($"Total Chunks : {chunks.Count}");
 
-            foreach (var chunk in chunks)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"===== Chunk {chunk.Id} =====");
-                Console.WriteLine($"Page: {chunk.PageNumber}");
-                Console.WriteLine(chunk.Text);
-            }
-
-            return chunks;
+            return Task.FromResult(chunks);
         }
 
+      
+
+        private string NormalizePdfText(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return string.Empty;
+
+            // Normalize whitespace
+            text = Regex.Replace(text, @"\s+", " ");
+
+            // Add space after punctuation when PDF extraction
+            // joins two sentences together.
+            text = Regex.Replace(
+                text,
+                @"([.!?])([A-Z])",
+                "$1 $2");
+
+            return text.Trim();
+        }
+
+        private List<PdfPage> SplitIntoSections(string text)
+        {
+            var sections = new List<PdfPage>();
+
+            if (string.IsNullOrWhiteSpace(text))
+                return sections;
+
+            // Find:
+            // 1.
+            // 2.
+            // 3.
+            // ...
+            // 10.
+            var matches = Regex.Matches(
+                text,
+                @"(?<!\d)\d+\.\s+");
+
+            for (int i = 0; i < matches.Count; i++)
+            {
+                int start = matches[i].Index;
+
+                int end = i + 1 < matches.Count
+                    ? matches[i + 1].Index
+                    : text.Length;
+
+                string sectionText = text
+                    .Substring(start, end - start)
+                    .Trim();
+
+                // Remove "1.", "2.", etc.
+                var titleMatch = Regex.Match(
+                    sectionText,
+                    @"^\d+\.\s+(.+?)(?=Employees|Employee|Managers|The|Salary|Medical|New|Training|HR|$)");
+
+                if (!titleMatch.Success)
+                    continue;
+
+                string title =
+                    titleMatch.Groups[1].Value.Trim();
+
+                string content =
+                    sectionText
+                        .Substring(titleMatch.Length)
+                        .Trim();
+
+                sections.Add(new PdfPage
+                {
+                    Title = title,
+                    Text = content
+                });
+            }
+
+            return sections;
+        }
+
+        // =========================================================
+        // 5. ADD CHUNK
+        // =========================================================
+
+        private void AddChunk(
+            List<DocumentChunk> chunks,
+            ref int chunkId,
+            int pageNumber,
+            string sectionTitle,
+            List<string> words)
+        {
+            if (words.Count == 0)
+                return;
+
+            string content =
+                string.Join(" ", words);
+
+            chunks.Add(new DocumentChunk
+            {
+                Id = chunkId++,
+                PageNumber = pageNumber,
+                SectionTitle = sectionTitle,
+                Text = content
+            });
+        }
         public async Task GenerateEmbeddings(List<DocumentChunk> chunks)
         {
+            Console.WriteLine("========== CHUNKS ==========");
             foreach (var chunk in chunks)
             {
                 chunk.Embedding =embeddingService.GenerateEmbedding(chunk.Text);
+                    Console.WriteLine();
+                    Console.WriteLine($"Chunk ID     : {chunk.Id}");
+                    Console.WriteLine($"Page         : {chunk.PageNumber}");
+                    Console.WriteLine($"Section      : {chunk.SectionTitle}");
+                    Console.WriteLine($"Text         : {chunk.Text}");
+                    Console.WriteLine($"Word Count   : {chunk.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length}");
 
+                
+                Console.WriteLine("First 10 values:");
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine(
+                        $"[{i}] = {chunk.Embedding[i]}");
+                }
             }
 
 
@@ -216,10 +374,10 @@ namespace AIChatbot.Services
         }
         public async Task RAGChat( string userquestion) 
         {
-         
+           await embeddingService.InitializeAsync();
             var pages = await ExtractText();
-            var pdfChunks = await CreateChunks(pages);
-            await GenerateEmbeddings(pdfChunks);
+            await CreateChunks(pages);
+            await GenerateEmbeddings(chunks);
 
 
 
@@ -227,6 +385,11 @@ namespace AIChatbot.Services
 
             Console.WriteLine("User Question: " + userquestion);
             var queryVector =embeddingService.GenerateEmbedding(userquestion);
+
+      
+
+
+
 
             var results =
                 searchService.Search(
