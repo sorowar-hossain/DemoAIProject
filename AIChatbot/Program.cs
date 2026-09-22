@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using AIChatbot;
+using AIChatbot.IServices;
 using AIChatbot.Models;
 using AIChatbot.Services;
 using System.Diagnostics.Metrics;
@@ -183,9 +184,41 @@ commonsrv.N_Gram(lemms);
  
  */
 
+/*
+ // Basic RAG, PDF Chatbot
+     PdfTextExtractor_RAG_Service service = new PdfTextExtractor_RAG_Service();
+    service.RAGChat("What should an employee do with company property before leaving?");
+ 
+ */
 
-PdfTextExtractor_RAG_Service service = new PdfTextExtractor_RAG_Service();
- service.RAGChat("What should an employee do with company property before leaving?");
+// Emial Generator
+
+OpenAILlmService llmService =
+    new OpenAILlmService();
+
+EmailPromptBuilderService promptBuilder =
+    new EmailPromptBuilderService();
+
+EmailGeneratorService emailGenerator =
+    new EmailGeneratorService(
+        llmService,
+        promptBuilder);
+var request = new EmailRequest
+{
+    Recipient = "HR Manager",
+    Purpose = "Leave Request",
+    Reason = "Family event",
+    Duration = "3 days",
+    Tone = "Professional"
+};
+
+var email =
+    await emailGenerator.GenerateAsync(request);
+
+Console.WriteLine();
+Console.WriteLine("===== GENERATED EMAIL =====");
+Console.WriteLine(email);
+
 
 
 
